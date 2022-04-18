@@ -1,143 +1,111 @@
-import 'package:ditonton/data/models/genre_model.dart';
-import 'package:ditonton/domain/entities/movie/movie_detail.dart';
 import 'package:equatable/equatable.dart';
+import 'package:ditonton/data/models/genre/genre_model.dart';
+import 'package:ditonton/domain/entities/tv/tv_detail.dart';
 
-class MovieDetailResponse extends Equatable {
-  MovieDetailResponse({
-    required this.adult,
+class TvDetailResponseModel extends Equatable {
+  TvDetailResponseModel({
     required this.backdropPath,
-    required this.budget,
     required this.genres,
     required this.homepage,
     required this.id,
-    required this.imdbId,
     required this.originalLanguage,
-    required this.originalTitle,
+    required this.originalName,
     required this.overview,
     required this.popularity,
     required this.posterPath,
-    required this.releaseDate,
-    required this.revenue,
-    required this.runtime,
+    required this.firstAirDate,
     required this.status,
     required this.tagline,
-    required this.title,
-    required this.video,
+    required this.name,
     required this.voteAverage,
     required this.voteCount,
   });
 
-  final bool adult;
-  final String? backdropPath;
-  final int budget;
+  final String backdropPath;
   final List<GenreModel> genres;
   final String homepage;
   final int id;
-  final String? imdbId;
   final String originalLanguage;
-  final String originalTitle;
+  final String originalName;
   final String overview;
   final double popularity;
   final String posterPath;
-  final String releaseDate;
-  final int revenue;
-  final int runtime;
+  final String firstAirDate;
   final String status;
   final String tagline;
-  final String title;
-  final bool video;
+  final String name;
   final double voteAverage;
   final int voteCount;
 
-  factory MovieDetailResponse.fromJson(Map<String, dynamic> json) =>
-      MovieDetailResponse(
-        adult: json["adult"],
+  factory TvDetailResponseModel.fromJson(Map<String, dynamic> json) =>
+      TvDetailResponseModel(
         backdropPath: json["backdrop_path"],
-        budget: json["budget"],
         genres: List<GenreModel>.from(
             json["genres"].map((x) => GenreModel.fromJson(x))),
         homepage: json["homepage"],
         id: json["id"],
-        imdbId: json["imdb_id"],
         originalLanguage: json["original_language"],
-        originalTitle: json["original_title"],
+        originalName: json["original_name"],
         overview: json["overview"],
         popularity: json["popularity"].toDouble(),
         posterPath: json["poster_path"],
-        releaseDate: json["release_date"],
-        revenue: json["revenue"],
-        runtime: json["runtime"],
+        firstAirDate: json["first_air_date"],
         status: json["status"],
         tagline: json["tagline"],
-        title: json["title"],
-        video: json["video"],
+        name: json["name"],
         voteAverage: json["vote_average"].toDouble(),
         voteCount: json["vote_count"],
       );
 
   Map<String, dynamic> toJson() => {
-        "adult": adult,
         "backdrop_path": backdropPath,
-        "budget": budget,
         "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
         "homepage": homepage,
         "id": id,
-        "imdb_id": imdbId,
         "original_language": originalLanguage,
-        "original_title": originalTitle,
+        "original_name": originalName,
         "overview": overview,
         "popularity": popularity,
         "poster_path": posterPath,
-        "release_date": releaseDate,
-        "revenue": revenue,
-        "runtime": runtime,
+        "first_air_date": firstAirDate,
         "status": status,
         "tagline": tagline,
-        "title": title,
-        "video": video,
+        "name": name,
         "vote_average": voteAverage,
         "vote_count": voteCount,
       };
 
-  MovieDetail toEntity() {
-    return MovieDetail(
-      adult: this.adult,
+  TvDetail toEntity() {
+    return TvDetail(
       backdropPath: this.backdropPath,
       genres: this.genres.map((genre) => genre.toEntity()).toList(),
       id: this.id,
-      originalTitle: this.originalTitle,
+      originalName: this.originalName,
       overview: this.overview,
+      popularity: this.popularity,
       posterPath: this.posterPath,
-      releaseDate: this.releaseDate,
-      runtime: this.runtime,
-      title: this.title,
+      firstAirDate: this.firstAirDate,
+      name: this.name,
       voteAverage: this.voteAverage,
       voteCount: this.voteCount,
     );
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
-        adult,
         backdropPath,
-        budget,
         genres,
         homepage,
         id,
-        imdbId,
         originalLanguage,
-        originalTitle,
+        originalName,
         overview,
         popularity,
         posterPath,
-        releaseDate,
-        revenue,
-        runtime,
+        firstAirDate,
         status,
         tagline,
-        title,
-        video,
+        name,
         voteAverage,
         voteCount,
       ];
