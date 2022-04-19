@@ -31,7 +31,7 @@ class TvTable extends Equatable {
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'name': name,
+        'title': name,
         'posterPath': posterPath,
         'overview': overview,
       };
