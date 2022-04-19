@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:ditonton/data/models/tv/tv_table.dart';
 import 'package:sqflite/sqflite.dart';
 
-class DatabaseHelper {
-  static DatabaseHelper? _databaseHelper;
-  DatabaseHelper._instance() {
+class DatabaseTvHelper {
+  static DatabaseTvHelper? _databaseHelper;
+  DatabaseTvHelper._instance() {
     _databaseHelper = this;
   }
 
-  factory DatabaseHelper() => _databaseHelper ?? DatabaseHelper._instance();
+  factory DatabaseTvHelper() => _databaseHelper ?? DatabaseTvHelper._instance();
 
   static Database? _database;
 

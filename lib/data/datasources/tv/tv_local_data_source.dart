@@ -9,10 +9,10 @@ abstract class TvLocalDataSource {
   Future<List<TvTable>> getWatchlistTv();
 }
 
-class MovieLocalDataSourceImpl implements TvLocalDataSource {
-  final DatabaseHelper databaseHelper;
+class TvLocalDataSourceImpl implements TvLocalDataSource {
+  final DatabaseTvHelper databaseHelper;
 
-  MovieLocalDataSourceImpl({required this.databaseHelper});
+  TvLocalDataSourceImpl({required this.databaseHelper});
 
   @override
   Future<String> insertWatchlist(TvTable tv) async {

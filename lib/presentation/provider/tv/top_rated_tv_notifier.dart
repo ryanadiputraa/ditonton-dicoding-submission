@@ -4,9 +4,9 @@ import 'package:ditonton/domain/usecases/tv/get_top_rated_tv.dart';
 import 'package:flutter/foundation.dart';
 
 class TopRatedTvNotifier extends ChangeNotifier {
-  final GetTopRatedTv getTopRatedTvs;
+  final GetTopRatedTv getTopRatedTv;
 
-  TopRatedTvNotifier({required this.getTopRatedTvs});
+  TopRatedTvNotifier({required this.getTopRatedTv});
 
   RequestState _state = RequestState.Empty;
   RequestState get state => _state;
@@ -21,7 +21,7 @@ class TopRatedTvNotifier extends ChangeNotifier {
     _state = RequestState.Loading;
     notifyListeners();
 
-    final result = await getTopRatedTvs.execute();
+    final result = await getTopRatedTv.execute();
 
     result.fold(
       (failure) {
