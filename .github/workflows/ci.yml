@@ -1,0 +1,31 @@
+name: Github Actions CI
+on: [push]
+
+jobs:
+  build:
+    name: flutter build
+    runs-on: macos-latest
+    steps:
+      # init actions and flutter
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "2.10.4"
+          channel: "stable"
+          architecture: x64
+      - run: flutter --version
+
+      # run test
+      - run: flutter pub get
+      - run: flutter test
+
+      # android apk build
+      - uses: actions/setup-java@v2
+        with:
+          distribution: "zulu"
+          java-version: "11"
+      - run: flutter build apk
+      - run: flutter build appbundle
+
+      # ios build
+      - run: flutter build ios --release --no-codesign
