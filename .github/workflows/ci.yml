@@ -1,9 +1,9 @@
-name: Github Actions CI
+name: CI
 on: [push]
 
 jobs:
   build:
-    name: flutter build
+    name: flutter build & test
     runs-on: macos-latest
     steps:
       # init actions and flutter
