@@ -12,7 +12,6 @@ jobs:
         with:
           flutter-version: "2.10.4"
           channel: "stable"
-          architecture: x64
       - run: flutter --version
 
       # run test
