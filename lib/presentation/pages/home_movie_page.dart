@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/movie/movie.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_list/movie_list_bloc.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/popular_movies_page.dart';
@@ -8,10 +9,8 @@ import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/tv_list_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
-import 'package:ditonton/presentation/provider/movie/movie_list_notifier.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeMoviePage extends StatefulWidget {
   static const ROUTE_NAME = '/home';
@@ -24,11 +23,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => Provider.of<MovieListNotifier>(context, listen: false)
-          ..fetchNowPlayingMovies()
-          ..fetchPopularMovies()
-          ..fetchTopRatedMovies());
+    BlocProvider.of<MovieListBloc>(context).add(OnGetNowPlayingMovies());
   }
 
   @override
@@ -96,52 +91,76 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 'Now Playing',
                 style: kHeading6,
               ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
-                final state = data.nowPlayingState;
-                if (state == RequestState.Loading) {
+              BlocBuilder<MovieListBloc, MovieListState>(
+                  builder: (context, state) {
+                if (state is NowPlayingLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.nowPlayingMovies);
-                } else {
-                  return Text('Failed');
-                }
-              }),
-              _buildSubHeading(
-                title: 'Popular',
-                onTap: () =>
-                    Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
-              ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
-                final state = data.popularMoviesState;
-                if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
+                } else if (state is MovieListHasNowPlaying) {
+                  return MovieList(state.nowPlaying);
+                } else if (state is NowPlayingError) {
+                  return Expanded(
+                    child: Center(
+                      child: Text(state.message),
+                    ),
                   );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.popularMovies);
                 } else {
-                  return Text('Failed');
-                }
-              }),
-              _buildSubHeading(
-                title: 'Top Rated',
-                onTap: () =>
-                    Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
-              ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
-                final state = data.topRatedMoviesState;
-                if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
+                  return Expanded(
+                    child: Container(),
                   );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.topRatedMovies);
-                } else {
-                  return Text('Failed');
                 }
               }),
+              // _buildSubHeading(
+              //   title: 'Popular',
+              //   onTap: () =>
+              //       Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
+              // ),
+              // BlocBuilder<MovieListBloc, MovieListState>(
+              //     builder: (context, state) {
+              //   if (state is PopularLoading) {
+              //     return Center(
+              //       child: CircularProgressIndicator(),
+              //     );
+              //   } else if (state is MovieListHasPopular) {
+              //     return MovieList(state.popular);
+              //   } else if (state is NowPlayingError) {
+              //     return Expanded(
+              //       child: Center(
+              //         child: Text(state.message),
+              //       ),
+              //     );
+              //   } else {
+              //     return Expanded(
+              //       child: Container(),
+              //     );
+              //   }
+              // }),
+              // _buildSubHeading(
+              //   title: 'Top Rated',
+              //   onTap: () =>
+              //       Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
+              // ),
+              // BlocBuilder<MovieListBloc, MovieListState>(
+              //     builder: (context, state) {
+              //   if (state is TopRatedLoading) {
+              //     return Center(
+              //       child: CircularProgressIndicator(),
+              //     );
+              //   } else if (state is MovieListHasTopRated) {
+              //     return MovieList(state.topRated);
+              //   } else if (state is NowPlayingError) {
+              //     return Expanded(
+              //       child: Center(
+              //         child: Text(state.message),
+              //       ),
+              //     );
+              //   } else {
+              //     return Expanded(
+              //       child: Container(),
+              //     );
+              //   }
+              // }),
             ],
           ),
         ),
