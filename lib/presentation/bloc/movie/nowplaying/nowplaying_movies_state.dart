@@ -29,5 +29,3 @@ class HasNowPlayingMovies extends NowPlayingMoviesState {
   @override
   List<Object> get props => [result];
 }
-
-// popular movies

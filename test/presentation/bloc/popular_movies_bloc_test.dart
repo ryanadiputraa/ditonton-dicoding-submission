@@ -2,22 +2,22 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/entities/movie/movie.dart';
-import 'package:ditonton/domain/usecases/movie/get_now_playing_movies.dart';
-import 'package:ditonton/presentation/bloc/movie/nowplaying/nowplaying_movies_bloc.dart';
+import 'package:ditonton/domain/usecases/movie/get_popular_movies.dart';
+import 'package:ditonton/presentation/bloc/movie/popular/popular_movies_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'nowplaying_movies_bloc_test.mocks.dart';
+import 'popular_movies_bloc_test.mocks.dart';
 
-@GenerateMocks([GetNowPlayingMovies])
+@GenerateMocks([GetPopularMovies])
 void main() {
-  late NowPlayingMoviesBloc nowPlayingMoviesBloc;
-  late MockGetNowPlayingMovies mockGetNowPlayingMovies;
+  late PopularMoviesBloc popularMoviesBloc;
+  late MockGetPopularMovies mockGetPopularMovies;
 
   setUp(() {
-    mockGetNowPlayingMovies = MockGetNowPlayingMovies();
-    nowPlayingMoviesBloc = NowPlayingMoviesBloc(mockGetNowPlayingMovies);
+    mockGetPopularMovies = MockGetPopularMovies();
+    popularMoviesBloc = PopularMoviesBloc(mockGetPopularMovies);
   });
 
   final tMovie = Movie(
@@ -38,41 +38,41 @@ void main() {
   final tMovieList = <Movie>[tMovie];
 
   test('initialState should be Empty', () {
-    expect(nowPlayingMoviesBloc.state, NowPlayingEmpty());
+    expect(popularMoviesBloc.state, PopularEmpty());
   });
 
-  group("get now playing movies", () {
-    blocTest<NowPlayingMoviesBloc, NowPlayingMoviesState>(
+  group("get popular movies", () {
+    blocTest<PopularMoviesBloc, PopularMoviesState>(
       'Should emit [Loading, HasData] when data is gotten successfully',
       build: () {
-        when(mockGetNowPlayingMovies.execute())
+        when(mockGetPopularMovies.execute())
             .thenAnswer((_) async => Right(tMovieList));
-        return nowPlayingMoviesBloc;
+        return popularMoviesBloc;
       },
-      act: (bloc) => bloc.add(OnGetNowPlayingMovies()),
+      act: (bloc) => bloc.add(OnGetPopularMovies()),
       expect: () => [
-        NowPlayingLoading(),
-        HasNowPlayingMovies(tMovieList),
+        PopularLoading(),
+        HasPopularMovies(tMovieList),
       ],
       verify: (bloc) {
-        verify(mockGetNowPlayingMovies.execute());
+        verify(mockGetPopularMovies.execute());
       },
     );
 
-    blocTest<NowPlayingMoviesBloc, NowPlayingMoviesState>(
+    blocTest<PopularMoviesBloc, PopularMoviesState>(
       'Should emit [Loading, Error] when get search is unsuccessful',
       build: () {
-        when(mockGetNowPlayingMovies.execute())
+        when(mockGetPopularMovies.execute())
             .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
-        return nowPlayingMoviesBloc;
+        return popularMoviesBloc;
       },
-      act: (bloc) => bloc.add(OnGetNowPlayingMovies()),
+      act: (bloc) => bloc.add(OnGetPopularMovies()),
       expect: () => [
-        NowPlayingLoading(),
-        NowPlayingError('Server Failure'),
+        PopularLoading(),
+        PopularError('Server Failure'),
       ],
       verify: (bloc) {
-        verify(mockGetNowPlayingMovies.execute());
+        verify(mockGetPopularMovies.execute());
       },
     );
   });

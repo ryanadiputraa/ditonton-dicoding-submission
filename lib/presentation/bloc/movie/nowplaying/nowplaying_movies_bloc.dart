@@ -4,14 +4,14 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'nowplaying_movies_event.dart';
-part 'nowplaying_state.dart';
+part 'nowplaying_movies_state.dart';
 
 class NowPlayingMoviesBloc
     extends Bloc<NowPlayingMoviesEvent, NowPlayingMoviesState> {
   final GetNowPlayingMovies _getNowPlayingMovies;
 
   NowPlayingMoviesBloc(this._getNowPlayingMovies) : super(NowPlayingEmpty()) {
-    on<OnFetch>((event, emit) async {
+    on<OnGetNowPlayingMovies>((event, emit) async {
       emit(NowPlayingLoading());
       final result = await _getNowPlayingMovies.execute();
 

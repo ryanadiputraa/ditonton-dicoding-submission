@@ -2,9 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/movie/movie.dart';
 import 'package:ditonton/presentation/bloc/movie/nowplaying/nowplaying_movies_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/popular/popular_movies_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/toprated/toprated_movies_bloc.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
+import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
+import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/tv_list_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +25,11 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   @override
   void initState() {
     super.initState();
-    context.read<NowPlayingMoviesBloc>().add(OnFetch());
+    Future.microtask(() {
+      context.read<NowPlayingMoviesBloc>().add(OnGetNowPlayingMovies());
+      context.read<PopularMoviesBloc>().add(OnGetPopularMovies());
+      context.read<TopRatedMoviesBloc>().add(OnGetTopRatedMovies());
+    });
   }
 
   @override
@@ -109,56 +117,56 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   );
                 }
               }),
-              // _buildSubHeading(
-              //   title: 'Popular',
-              //   onTap: () =>
-              //       Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
-              // ),
-              // BlocBuilder<MovieListBloc, MovieListState>(
-              //     builder: (context, state) {
-              //   if (state is PopularLoading) {
-              //     return Center(
-              //       child: CircularProgressIndicator(),
-              //     );
-              //   } else if (state is MovieListHasPopular) {
-              //     return MovieList(state.popular);
-              //   } else if (state is NowPlayingError) {
-              //     return Expanded(
-              //       child: Center(
-              //         child: Text(state.message),
-              //       ),
-              //     );
-              //   } else {
-              //     return Expanded(
-              //       child: Container(),
-              //     );
-              //   }
-              // }),
-              // _buildSubHeading(
-              //   title: 'Top Rated',
-              //   onTap: () =>
-              //       Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
-              // ),
-              // BlocBuilder<MovieListBloc, MovieListState>(
-              //     builder: (context, state) {
-              //   if (state is TopRatedLoading) {
-              //     return Center(
-              //       child: CircularProgressIndicator(),
-              //     );
-              //   } else if (state is MovieListHasTopRated) {
-              //     return MovieList(state.topRated);
-              //   } else if (state is NowPlayingError) {
-              //     return Expanded(
-              //       child: Center(
-              //         child: Text(state.message),
-              //       ),
-              //     );
-              //   } else {
-              //     return Expanded(
-              //       child: Container(),
-              //     );
-              //   }
-              // }),
+              _buildSubHeading(
+                title: 'Popular',
+                onTap: () =>
+                    Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
+              ),
+              BlocBuilder<PopularMoviesBloc, PopularMoviesState>(
+                  builder: (context, state) {
+                if (state is PopularLoading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is HasPopularMovies) {
+                  return MovieList(state.result);
+                } else if (state is PopularError) {
+                  return Expanded(
+                    child: Center(
+                      child: Text(state.message),
+                    ),
+                  );
+                } else {
+                  return Expanded(
+                    child: Container(),
+                  );
+                }
+              }),
+              _buildSubHeading(
+                title: 'Top Rated',
+                onTap: () =>
+                    Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
+              ),
+              BlocBuilder<TopRatedMoviesBloc, TopRatedMoviesState>(
+                  builder: (context, state) {
+                if (state is TopRatedLoading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is HasTopRatedMovies) {
+                  return MovieList(state.result);
+                } else if (state is TopRatedError) {
+                  return Expanded(
+                    child: Center(
+                      child: Text(state.message),
+                    ),
+                  );
+                } else {
+                  return Expanded(
+                    child: Container(),
+                  );
+                }
+              }),
             ],
           ),
         ),
