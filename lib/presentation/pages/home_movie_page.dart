@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/movie/movie.dart';
-import 'package:ditonton/presentation/bloc/movie/movie_list/movie_list_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/nowplaying/nowplaying_movies_bloc.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
@@ -21,7 +21,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   @override
   void initState() {
     super.initState();
-    context.read<MovieListBloc>().add(OnGetNowPlayingMovies());
+    context.read<NowPlayingMoviesBloc>().add(OnFetch());
   }
 
   @override
@@ -89,14 +89,14 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 'Now Playing',
                 style: kHeading6,
               ),
-              BlocBuilder<MovieListBloc, MovieListState>(
+              BlocBuilder<NowPlayingMoviesBloc, NowPlayingMoviesState>(
                   builder: (context, state) {
                 if (state is NowPlayingLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state is MovieListHasNowPlaying) {
-                  return MovieList(state.nowPlaying);
+                } else if (state is HasNowPlayingMovies) {
+                  return MovieList(state.result);
                 } else if (state is NowPlayingError) {
                   return Expanded(
                     child: Center(

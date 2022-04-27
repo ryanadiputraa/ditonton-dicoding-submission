@@ -1,6 +1,6 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/presentation/bloc/movie/movie_list/movie_list_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/nowplaying/nowplaying_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie/search/search_bloc.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         BlocProvider(
-          create: (_) => di.locator<MovieListBloc>(),
+          create: (_) => di.locator<NowPlayingMoviesBloc>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<MovieDetailNotifier>(),
