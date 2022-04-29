@@ -28,6 +28,7 @@ import 'package:ditonton/domain/usecases/tv/get_watchlist_tv.dart';
 import 'package:ditonton/domain/usecases/tv/remove_watch_list.dart';
 import 'package:ditonton/domain/usecases/tv/save_watch_list.dart';
 import 'package:ditonton/domain/usecases/tv/search_tv.dart';
+import 'package:ditonton/presentation/bloc/movie/moviedetail/movie_detail_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie/nowplaying/nowplaying_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie/popular/popular_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie/search/search_bloc.dart';
@@ -53,6 +54,7 @@ void init() async {
   locator.registerFactory(() => NowPlayingMoviesBloc(locator()));
   locator.registerFactory(() => PopularMoviesBloc(locator()));
   locator.registerFactory(() => TopRatedMoviesBloc(locator()));
+  locator.registerFactory(() => MovieDetailBloc(locator()));
 
   // provider
   locator.registerFactory(
