@@ -3,6 +3,7 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/genre/genre.dart';
 import 'package:ditonton/domain/entities/movie/movie_detail.dart';
 import 'package:ditonton/presentation/bloc/movie/moviedetail/movie_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/recommendations/recommendations_movies_bloc.dart';
 import 'package:ditonton/presentation/provider/movie/movie_detail_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,8 +26,9 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
     super.initState();
     Future.microtask(() {
       context.read<MovieDetailBloc>().add(OnGetMovieDetail(widget.id));
-      // Provider.of<MovieDetailNotifier>(context, listen: false)
-      //     .loadWatchlistStatus(widget.id);
+      context
+          .read<RecommendationsMoviesBloc>()
+          .add(OnGetRecommendationsMovies(widget.id));
     });
   }
 
@@ -192,62 +194,65 @@ class DetailContent extends StatelessWidget {
                               'Recommendations',
                               style: kHeading6,
                             ),
-                            // Consumer<MovieDetailNotifier>(
-                            //   builder: (context, data, child) {
-                            //     if (data.recommendationState ==
-                            //         RequestState.Loading) {
-                            //       return Center(
-                            //         child: CircularProgressIndicator(),
-                            //       );
-                            //     } else if (data.recommendationState ==
-                            //         RequestState.Error) {
-                            //       return Text(data.message);
-                            //     } else if (data.recommendationState ==
-                            //         RequestState.Loaded) {
-                            //       return Container(
-                            //         height: 150,
-                            //         child: ListView.builder(
-                            //           scrollDirection: Axis.horizontal,
-                            //           itemBuilder: (context, index) {
-                            //             final movie = recommendations[index];
-                            //             return Padding(
-                            //               padding: const EdgeInsets.all(4.0),
-                            //               child: InkWell(
-                            //                 onTap: () {
-                            //                   Navigator.pushReplacementNamed(
-                            //                     context,
-                            //                     MovieDetailPage.ROUTE_NAME,
-                            //                     arguments: movie.id,
-                            //                   );
-                            //                 },
-                            //                 child: ClipRRect(
-                            //                   borderRadius: BorderRadius.all(
-                            //                     Radius.circular(8),
-                            //                   ),
-                            //                   child: CachedNetworkImage(
-                            //                     imageUrl:
-                            //                         'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-                            //                     placeholder: (context, url) =>
-                            //                         Center(
-                            //                       child:
-                            //                           CircularProgressIndicator(),
-                            //                     ),
-                            //                     errorWidget:
-                            //                         (context, url, error) =>
-                            //                             Icon(Icons.error),
-                            //                   ),
-                            //                 ),
-                            //               ),
-                            //             );
-                            //           },
-                            //           itemCount: recommendations.length,
-                            //         ),
-                            //       );
-                            //     } else {
-                            //       return Container();
-                            //     }
-                            //   },
-                            // ),
+                            BlocBuilder<RecommendationsMoviesBloc,
+                                RecommendationsMoviesState>(
+                              builder: (context, state) {
+                                if (state is RecommendationsLoading) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                } else if (state is HasRecommendationsMovies) {
+                                  return Container(
+                                    height: 150,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) {
+                                        final movie = state.result[index];
+                                        return Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: InkWell(
+                                            onTap: () {
+                                              Navigator.pushReplacementNamed(
+                                                context,
+                                                MovieDetailPage.ROUTE_NAME,
+                                                arguments: movie.id,
+                                              );
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(8),
+                                              ),
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                                                placeholder: (context, url) =>
+                                                    Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                ),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Icon(Icons.error),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      itemCount: state.result.length,
+                                    ),
+                                  );
+                                } else if (state is RecommendationsError) {
+                                  return Center(
+                                    child: Text(state.message),
+                                    key: Key("error_message"),
+                                  );
+                                } else {
+                                  return Expanded(
+                                    child: Container(),
+                                  );
+                                }
+                              },
+                            ),
                           ],
                         ),
                       ),
