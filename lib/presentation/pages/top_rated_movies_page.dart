@@ -41,10 +41,9 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
                 itemCount: state.result.length,
               );
             } else if (state is TopRatedError) {
-              return Expanded(
-                child: Center(
-                  child: Text(state.message),
-                ),
+              return Center(
+                child: Text(state.message),
+                key: Key("error_message"),
               );
             } else {
               return Expanded(
