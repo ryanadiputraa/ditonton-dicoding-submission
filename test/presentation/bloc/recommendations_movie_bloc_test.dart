@@ -27,7 +27,7 @@ void main() {
     expect(recommendationsMoviesBloc.state, RecommendationsEmpty());
   });
 
-  group("get now playing movies", () {
+  group("get recommendations movies", () {
     blocTest<RecommendationsMoviesBloc, RecommendationsMoviesState>(
       'Should emit [Loading, HasData] when data is gotten successfully',
       build: () {
