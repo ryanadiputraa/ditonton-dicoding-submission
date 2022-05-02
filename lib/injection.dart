@@ -38,10 +38,7 @@ import 'package:ditonton/presentation/bloc/movie/watchlist/watchlist_movies_bloc
 import 'package:ditonton/presentation/bloc/tv/ontheair/ontheair_tv_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/popular/popular_tv_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/toprated/toprated_tv_bloc.dart';
-import 'package:ditonton/presentation/provider/tv/popular_tv_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/top_rated_tv_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/tv_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/tv_list_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/tv_search_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/watchlist_tv_notifier.dart';
 import 'package:get_it/get_it.dart';
@@ -67,12 +64,6 @@ void init() async {
   locator.registerFactory(() => TopRatedTvBloc(locator()));
   // provider
   locator.registerFactory(
-    () => TvListNotifier(
-        getOnTheAirTv: locator(),
-        getPopularTv: locator(),
-        getTopRatedTv: locator()),
-  );
-  locator.registerFactory(
     () => TvDetailNotifier(
       getTvDetail: locator(),
       getTvRecommendations: locator(),
@@ -84,16 +75,6 @@ void init() async {
   locator.registerFactory(
     () => TvSearchNotifier(
       searchTv: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => PopularTvNotifier(
-      locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => TopRatedTvNotifier(
-      getTopRatedTv: locator(),
     ),
   );
   locator.registerFactory(
