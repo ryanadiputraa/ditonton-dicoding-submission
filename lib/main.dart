@@ -10,6 +10,7 @@ import 'package:ditonton/presentation/bloc/movie/watchlist/watchlist_movies_bloc
 import 'package:ditonton/presentation/bloc/tv/ontheair/ontheair_tv_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/popular/popular_tv_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/recommendations/tv_recommendations_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv/search/search_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/toprated/toprated_tv_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/tvdetail/tv_detail_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/watchlist/watchlist_tv_bloc.dart';
@@ -25,7 +26,6 @@ import 'package:ditonton/presentation/pages/top_rated_tv_page.dart';
 import 'package:ditonton/presentation/pages/tv_detail_page.dart';
 import 'package:ditonton/presentation/pages/tv_list_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
-import 'package:ditonton/presentation/provider/tv/tv_search_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,9 +56,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => di.locator<TvDetailBloc>()),
         BlocProvider(create: (_) => di.locator<TvRecommendationsBloc>()),
         BlocProvider(create: (_) => di.locator<WatchlistTvBloc>()),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSearchNotifier>(),
-        ),
+        BlocProvider(create: (_) => di.locator<SearchTvBloc>()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

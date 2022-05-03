@@ -38,10 +38,10 @@ import 'package:ditonton/presentation/bloc/movie/watchlist/watchlist_movies_bloc
 import 'package:ditonton/presentation/bloc/tv/ontheair/ontheair_tv_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/popular/popular_tv_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/recommendations/tv_recommendations_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv/search/search_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/toprated/toprated_tv_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/tvdetail/tv_detail_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/watchlist/watchlist_tv_bloc.dart';
-import 'package:ditonton/presentation/provider/tv/tv_search_notifier.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/io_client.dart';
 
@@ -67,13 +67,7 @@ void init() async {
   locator.registerFactory(() => TvRecommendationsBloc(locator()));
   locator.registerFactory(
       () => WatchlistTvBloc(locator(), locator(), locator(), locator()));
-
-  // provider
-  locator.registerFactory(
-    () => TvSearchNotifier(
-      searchTv: locator(),
-    ),
-  );
+  locator.registerFactory(() => SearchTvBloc(locator()));
 
   // use case
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));
