@@ -1,12 +1,10 @@
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/common/utils.dart';
 import 'package:ditonton/presentation/bloc/movie/watchlist/watchlist_movies_bloc.dart';
-import 'package:ditonton/presentation/provider/tv/watchlist_tv_notifier.dart';
+import 'package:ditonton/presentation/bloc/tv/watchlist/watchlist_tv_bloc.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:ditonton/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
   static const ROUTE_NAME = '/watchlist-movie';
@@ -22,8 +20,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
     super.initState();
     Future.microtask(() {
       context.read<WatchlistMoviesBloc>().add(OnGetWatchlistMovies());
-      Provider.of<WatchlistTvNotifier>(context, listen: false)
-          .fetchWatchlistTv();
+      context.read<WatchlistTvBloc>().add(OnGetWatchlistTv());
     });
   }
 
@@ -35,7 +32,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
 
   void didPopNext() {
     context.read<WatchlistMoviesBloc>().add(OnGetWatchlistMovies());
-    Provider.of<WatchlistTvNotifier>(context, listen: false).fetchWatchlistTv();
+    context.read<WatchlistTvBloc>().add(OnGetWatchlistTv());
   }
 
   @override
@@ -54,30 +51,33 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
               );
             } else if (state is HasWatchlistMovies) {
               final movies = state.result;
-              return Consumer<WatchlistTvNotifier>(
-                  builder: (context, data, child) {
-                if (data.watchlistState == RequestState.Loading) {
+              return BlocBuilder<WatchlistTvBloc, WatchlistTvState>(
+                  builder: (context, state) {
+                if (state is WatchlistTvLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (data.watchlistState == RequestState.Loaded) {
-                  final watchlistCount =
-                      movies.length + data.watchlistTv.length;
+                } else if (state is HasWatchlistTv) {
+                  final watchlistCount = movies.length + state.result.length;
                   return ListView.builder(
                     itemBuilder: (context, index) {
                       if (index < movies.length) {
                         final movie = movies[index];
                         return MovieCard(movie);
                       }
-                      final tv = data.watchlistTv[index - movies.length];
+                      final tv = state.result[index - movies.length];
                       return TvCard(tv);
                     },
                     itemCount: watchlistCount,
                   );
-                } else {
+                } else if (state is WatchlistTvError) {
                   return Center(
-                    key: Key('error_message'),
-                    child: Text(data.message),
+                    child: Text(state.message),
+                    key: Key("error_message"),
+                  );
+                } else {
+                  return Expanded(
+                    child: Container(),
                   );
                 }
               });
