@@ -47,7 +47,7 @@ import 'package:http/io_client.dart';
 
 final locator = GetIt.instance;
 
-void init() async {
+Future init() async {
   IOClient ioClient = await SSLPinning.ioClient;
 
   // bloc
