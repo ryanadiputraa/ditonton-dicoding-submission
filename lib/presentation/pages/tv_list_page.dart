@@ -4,7 +4,6 @@ import 'package:ditonton/domain/entities/tv/tv.dart';
 import 'package:ditonton/presentation/bloc/tv/ontheair/ontheair_tv_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/popular/popular_tv_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/toprated/toprated_tv_bloc.dart';
-import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/popular_tv_page.dart';
 import 'package:ditonton/presentation/pages/search_tv_page.dart';
@@ -13,6 +12,7 @@ import 'package:ditonton/presentation/pages/tv_detail_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:about/about.dart';
 
 class TvListPage extends StatefulWidget {
   static const ROUTE_NAME = '/tv';
