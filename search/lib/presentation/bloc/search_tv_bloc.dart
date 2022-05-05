@@ -1,13 +1,13 @@
 import 'package:core/domain/entities/tv/tv.dart';
-import 'package:core/domain/usecases/tv/search_tv.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:search/domain/usecase/search_tv.dart';
 
-part 'search_event.dart';
-part 'search_state.dart';
+part 'search_tv_event.dart';
+part 'search_tv_state.dart';
 
-EventTransformer<T> debounce<T>(Duration duration) {
+EventTransformer<T> debounceTv<T>(Duration duration) {
   return (events, mapper) => events.debounceTime(duration).flatMap(mapper);
 }
 
@@ -15,7 +15,7 @@ class SearchTvBloc extends Bloc<SearchTvEvent, SearchTvState> {
   final SearchTv _searchTv;
 
   SearchTvBloc(this._searchTv) : super(SearchTvEmpty()) {
-    on<OnQueryChanged>((event, emit) async {
+    on<OnTvQueryChanged>((event, emit) async {
       final query = event.query;
 
       emit(SearchTvLoading());
@@ -29,6 +29,6 @@ class SearchTvBloc extends Bloc<SearchTvEvent, SearchTvState> {
           emit(SearchTvHasData(data));
         },
       );
-    }, transformer: debounce(const Duration(milliseconds: 500)));
+    }, transformer: debounceTv(const Duration(milliseconds: 500)));
   }
 }

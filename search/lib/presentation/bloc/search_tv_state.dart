@@ -1,4 +1,4 @@
-part of 'search_bloc.dart';
+part of 'search_tv_bloc.dart';
 
 abstract class SearchTvState extends Equatable {
   const SearchTvState();

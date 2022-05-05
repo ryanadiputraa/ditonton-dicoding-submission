@@ -1,14 +1,14 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:core/utils/failure.dart';
-import 'package:core/domain/usecases/tv/search_tv.dart';
-import 'package:core/presentation/bloc/tv/search/search_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:search/domain/usecase/search_tv.dart';
+import 'package:search/presentation/bloc/search_tv_bloc.dart';
 
-import '../../../dummy_data/dummy_objects.dart';
-import 'search_bloc_test.mocks.dart';
+import '../../core/test/dummy_data/dummy_objects.dart';
+import 'search_tv_bloc_test.mocks.dart';
 
 @GenerateMocks([SearchTv])
 void main() {
@@ -31,7 +31,7 @@ void main() {
           .thenAnswer((_) async => Right(testTvlist));
       return searchBloc;
     },
-    act: (bloc) => bloc.add(const OnQueryChanged(tQuery)),
+    act: (bloc) => bloc.add(const OnTvQueryChanged(tQuery)),
     wait: const Duration(milliseconds: 500),
     expect: () => [
       SearchTvLoading(),
@@ -49,7 +49,7 @@ void main() {
           .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return searchBloc;
     },
-    act: (bloc) => bloc.add(const OnQueryChanged(tQuery)),
+    act: (bloc) => bloc.add(const OnTvQueryChanged(tQuery)),
     wait: const Duration(milliseconds: 500),
     expect: () => [
       SearchTvLoading(),

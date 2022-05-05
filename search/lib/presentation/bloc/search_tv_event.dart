@@ -1,4 +1,4 @@
-part of 'search_bloc.dart';
+part of 'search_tv_bloc.dart';
 
 abstract class SearchTvEvent extends Equatable {
   const SearchTvEvent();
@@ -7,10 +7,10 @@ abstract class SearchTvEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class OnQueryChanged extends SearchTvEvent {
+class OnTvQueryChanged extends SearchTvEvent {
   final String query;
 
-  const OnQueryChanged(this.query);
+  const OnTvQueryChanged(this.query);
 
   @override
   List<Object> get props => [query];

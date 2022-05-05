@@ -39,6 +39,8 @@ dependencies:
     path: core
   about:
     path: about
+  search:
+    path: search
 
 dev_dependencies:
   flutter_test:

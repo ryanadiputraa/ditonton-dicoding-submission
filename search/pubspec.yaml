@@ -1,4 +1,4 @@
-name: about
+name: search
 description: A new Flutter package project.
 publish_to: "none"
 version: 0.0.1
@@ -11,8 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  dartz: ^0.10.0-nullsafety.2
 
-  # modules
   core:
     path: ../core
 
@@ -20,6 +20,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
+  mockito: ^5.0.8
+  build_runner: ^2.0.4
+  bloc_test: ^9.0.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

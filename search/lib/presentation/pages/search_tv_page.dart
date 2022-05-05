@@ -1,11 +1,11 @@
-import 'package:core/presentation/bloc/movie/search/search_bloc.dart';
-import 'package:core/presentation/widgets/movie_card_list.dart';
+import 'package:core/presentation/widgets/tv_card_list.dart';
 import 'package:core/styles/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:search/presentation/bloc/search_tv_bloc.dart';
 
-class SearchPage extends StatelessWidget {
-  const SearchPage({Key? key}) : super(key: key);
+class SearchTvPage extends StatelessWidget {
+  const SearchTvPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class SearchPage extends StatelessWidget {
           children: [
             TextField(
               onChanged: (query) {
-                context.read<SearchBloc>().add(OnQueryChanged(query));
+                context.read<SearchTvBloc>().add(OnTvQueryChanged(query));
               },
               decoration: const InputDecoration(
                 hintText: 'Search title',
@@ -34,25 +34,25 @@ class SearchPage extends StatelessWidget {
               'Search Result',
               style: kHeading6,
             ),
-            BlocBuilder<SearchBloc, SearchState>(
+            BlocBuilder<SearchTvBloc, SearchTvState>(
               builder: (context, state) {
-                if (state is SearchLoading) {
+                if (state is SearchTvLoading) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state is SearchHasData) {
+                } else if (state is SearchTvHasData) {
                   final result = state.result;
                   return Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),
                       itemBuilder: (context, index) {
-                        final movie = result[index];
-                        return MovieCard(movie);
+                        final tv = result[index];
+                        return TvCard(tv);
                       },
                       itemCount: result.length,
                     ),
                   );
-                } else if (state is SearchError) {
+                } else if (state is SearchTvError) {
                   return Expanded(
                     child: Center(
                       child: Text(state.message),
