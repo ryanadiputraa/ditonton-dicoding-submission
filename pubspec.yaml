@@ -43,6 +43,8 @@ dependencies:
     path: search
   watchlist:
     path: watchlist
+  movie:
+    path: movie
 
 dev_dependencies:
   flutter_test:

@@ -1,19 +1,10 @@
 import 'package:core/utils/utils.dart';
-import 'package:core/presentation/bloc/movie/moviedetail/movie_detail_bloc.dart';
-import 'package:core/presentation/bloc/movie/nowplaying/nowplaying_movies_bloc.dart';
-import 'package:core/presentation/bloc/movie/popular/popular_movies_bloc.dart';
-import 'package:core/presentation/bloc/movie/recommendations/recommendations_movies_bloc.dart';
-import 'package:core/presentation/bloc/movie/toprated/toprated_movies_bloc.dart';
 import 'package:core/presentation/bloc/tv/ontheair/ontheair_tv_bloc.dart';
 import 'package:core/presentation/bloc/tv/popular/popular_tv_bloc.dart';
 import 'package:core/presentation/bloc/tv/recommendations/tv_recommendations_bloc.dart';
 import 'package:core/presentation/bloc/tv/toprated/toprated_tv_bloc.dart';
 import 'package:core/presentation/bloc/tv/tvdetail/tv_detail_bloc.dart';
-import 'package:core/presentation/pages/movie_detail_page.dart';
-import 'package:core/presentation/pages/home_movie_page.dart';
-import 'package:core/presentation/pages/popular_movies_page.dart';
 import 'package:core/presentation/pages/popular_tv_page.dart';
-import 'package:core/presentation/pages/top_rated_movies_page.dart';
 import 'package:core/presentation/pages/top_rated_tv_page.dart';
 import 'package:core/presentation/pages/tv_detail_page.dart';
 import 'package:core/presentation/pages/tv_list_page.dart';
@@ -29,6 +20,7 @@ import 'package:ditonton/injection.dart' as di;
 import 'package:about/about.dart';
 import 'package:search/search.dart';
 import 'package:watchlist/watchlist.dart';
+import 'package:movie/movie.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
