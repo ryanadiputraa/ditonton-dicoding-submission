@@ -14,9 +14,21 @@ jobs:
           channel: "stable"
       - run: flutter --version
 
-      # run test
-      - run: flutter pub get
-      - run: flutter test
+      - name: Test core module
+        working-directory: ./core
+        run: |
+          flutter pub get
+          flutter test
+      - name: Test about module
+        working-directory: ./about
+        run: |
+          flutter pub get
+          flutter test
+      - name: Test search module
+        working-directory: ./search
+        run: |
+          flutter pub get
+          flutter test
 
       # android apk build
       - uses: actions/setup-java@v2
