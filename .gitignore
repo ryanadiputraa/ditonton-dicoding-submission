@@ -46,4 +46,7 @@ app.*.map.json
 /android/app/release
 
 # test coverage
-/coverage/
+core/coverage/
+movie/coverage/
+search/coverage/
+watchlist/coverage/

@@ -6,7 +6,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:watchlist/watchlist.dart';
 
-import '../../../dummy_data/dummy_objects.dart';
+import '../dummy_objects.dart';
 import 'watchlist_movie_bloc_test.mocks.dart';
 
 const String watchlistAddMessage = 'Added to Watchlist';

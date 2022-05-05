@@ -1,16 +1,16 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:core/utils/failure.dart';
-import 'package:core/domain/usecases/tv/get_watchlist_status.dart';
-import 'package:core/domain/usecases/tv/get_watchlist_tv.dart';
-import 'package:core/domain/usecases/tv/remove_watch_list.dart';
-import 'package:core/domain/usecases/tv/save_watch_list.dart';
-import 'package:core/presentation/bloc/tv/watchlist/watchlist_tv_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:watchlist/domain/usecase/get_watchlist_tv.dart';
+import 'package:watchlist/domain/usecase/get_watchlist_tv_status.dart';
+import 'package:watchlist/domain/usecase/remove_watch_list.dart';
+import 'package:watchlist/domain/usecase/save_watch_list.dart';
+import 'package:watchlist/presentation/bloc/watchlist_tv_bloc.dart';
 
-import '../../../dummy_data/dummy_objects.dart';
+import '../dummy_objects.dart';
 import 'watchlist_tv_bloc_test.mocks.dart';
 
 const String watchlistAddMessage = 'Added to Watchlist';
@@ -75,7 +75,7 @@ void main() {
           .thenAnswer((_) async => true);
       return watchlistTvBloc;
     },
-    act: (bloc) => bloc.add(OnGetWatchlistStatus(testTvDetail.id)),
+    act: (bloc) => bloc.add(OnGetWatchlistTvStatus(testTvDetail.id)),
     expect: () => [const IsTvAddedToWatchlist(true)],
     verify: (bloc) {
       verify(mockGetWatchListStatus.execute(testTvDetail.id));
