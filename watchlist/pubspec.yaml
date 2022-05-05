@@ -1,4 +1,4 @@
-name: core
+name: watchlist
 description: A new Flutter package project.
 publish_to: "none"
 version: 0.0.1
@@ -11,17 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  equatable: ^2.0.2
-  google_fonts: ^2.1.0
-  sqflite: ^2.0.0+3
-  rxdart: ^0.27.3
-  dartz: ^0.10.0-nullsafety.2
-  flutter_bloc: ^8.0.1
-  cached_network_image: ^3.0.0
-  flutter_rating_bar: ^4.0.0
 
-  watchlist:
-    path: ../watchlist
+  core:
+    path: ../core
 
 dev_dependencies:
   flutter_test:

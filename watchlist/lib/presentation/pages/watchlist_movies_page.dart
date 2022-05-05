@@ -1,10 +1,10 @@
 import 'package:core/utils/utils.dart';
-import 'package:core/presentation/bloc/movie/watchlist/watchlist_movies_bloc.dart';
-import 'package:core/presentation/bloc/tv/watchlist/watchlist_tv_bloc.dart';
 import 'package:core/presentation/widgets/movie_card_list.dart';
 import 'package:core/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:watchlist/presentation/bloc/watchlist_movies_bloc.dart';
+import 'package:watchlist/presentation/bloc/watchlist_tv_bloc.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
   const WatchlistMoviesPage({Key? key}) : super(key: key);

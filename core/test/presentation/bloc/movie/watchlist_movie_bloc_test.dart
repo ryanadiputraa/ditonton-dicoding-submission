@@ -1,14 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:core/utils/failure.dart';
-import 'package:core/domain/usecases/movie/get_watchlist_movies.dart';
-import 'package:core/domain/usecases/movie/get_watchlist_status.dart';
-import 'package:core/domain/usecases/movie/remove_watchlist.dart';
-import 'package:core/domain/usecases/movie/save_watchlist.dart';
-import 'package:core/presentation/bloc/movie/watchlist/watchlist_movies_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:watchlist/watchlist.dart';
 
 import '../../../dummy_data/dummy_objects.dart';
 import 'watchlist_movie_bloc_test.mocks.dart';

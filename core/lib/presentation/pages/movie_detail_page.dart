@@ -3,13 +3,13 @@ import 'package:core/domain/entities/genre/genre.dart';
 import 'package:core/domain/entities/movie/movie_detail.dart';
 import 'package:core/presentation/bloc/movie/moviedetail/movie_detail_bloc.dart';
 import 'package:core/presentation/bloc/movie/recommendations/recommendations_movies_bloc.dart';
-import 'package:core/presentation/bloc/movie/watchlist/watchlist_movies_bloc.dart';
 import 'package:core/styles/colors.dart';
 import 'package:core/styles/text_styles.dart';
 import 'package:core/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:watchlist/watchlist.dart';
 
 class MovieDetailPage extends StatefulWidget {
   final int id;

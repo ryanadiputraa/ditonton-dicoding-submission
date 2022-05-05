@@ -1,11 +1,11 @@
 import 'package:core/domain/entities/tv/tv.dart';
 import 'package:core/domain/entities/tv/tv_detail.dart';
-import 'package:core/domain/usecases/tv/get_watchlist_status.dart';
-import 'package:core/domain/usecases/tv/get_watchlist_tv.dart';
-import 'package:core/domain/usecases/tv/remove_watch_list.dart';
-import 'package:core/domain/usecases/tv/save_watch_list.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:watchlist/domain/usecase/get_watchlist_tv.dart';
+import 'package:watchlist/domain/usecase/get_watchlist_tv_status.dart';
+import 'package:watchlist/domain/usecase/remove_watch_list.dart';
+import 'package:watchlist/domain/usecase/save_watch_list.dart';
 
 part 'watchlist_tv_event.dart';
 part 'watchlist_tv_state.dart';
@@ -33,7 +33,7 @@ class WatchlistTvBloc extends Bloc<WatchlistTvEvent, WatchlistTvState> {
       );
     });
 
-    on<OnGetWatchlistStatus>((event, emit) async {
+    on<OnGetWatchlistTvStatus>((event, emit) async {
       final int id = event.id;
       final result = await _getWatchListStatus.execute(id);
       emit(IsTvAddedToWatchlist(result));

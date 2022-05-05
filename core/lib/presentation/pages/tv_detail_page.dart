@@ -3,13 +3,13 @@ import 'package:core/domain/entities/genre/genre.dart';
 import 'package:core/domain/entities/tv/tv_detail.dart';
 import 'package:core/presentation/bloc/tv/recommendations/tv_recommendations_bloc.dart';
 import 'package:core/presentation/bloc/tv/tvdetail/tv_detail_bloc.dart';
-import 'package:core/presentation/bloc/tv/watchlist/watchlist_tv_bloc.dart';
 import 'package:core/styles/colors.dart';
 import 'package:core/styles/text_styles.dart';
 import 'package:core/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:watchlist/watchlist.dart';
 
 class TvDetailPage extends StatefulWidget {
   final int id;
@@ -25,7 +25,7 @@ class _TvDetailPageState extends State<TvDetailPage> {
     super.initState();
     Future.microtask(() {
       context.read<TvDetailBloc>().add(OnGetTvDetail(widget.id));
-      context.read<WatchlistTvBloc>().add(OnGetWatchlistStatus(widget.id));
+      context.read<WatchlistTvBloc>().add(OnGetWatchlistTvStatus(widget.id));
       context
           .read<TvRecommendationsBloc>()
           .add(OnGetTvRecommendations(widget.id));
@@ -141,7 +141,7 @@ class DetailContent extends StatelessWidget {
 
                                 context
                                     .read<WatchlistTvBloc>()
-                                    .add(OnGetWatchlistStatus(tv.id));
+                                    .add(OnGetWatchlistTvStatus(tv.id));
                               },
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,

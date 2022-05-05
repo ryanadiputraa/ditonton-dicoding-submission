@@ -1,11 +1,11 @@
 import 'package:core/presentation/bloc/movie/moviedetail/movie_detail_bloc.dart';
 import 'package:core/presentation/bloc/movie/recommendations/recommendations_movies_bloc.dart';
-import 'package:core/presentation/bloc/movie/watchlist/watchlist_movies_bloc.dart';
 import 'package:core/presentation/pages/movie_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:watchlist/watchlist.dart';
 
 import '../../dummy_data/dummy_objects.dart';
 import 'helper/MockMovieBloc.dart';

@@ -14,10 +14,10 @@ class OnGetWatchlistTv extends WatchlistTvEvent {
   List<Object> get props => [];
 }
 
-class OnGetWatchlistStatus extends WatchlistTvEvent {
+class OnGetWatchlistTvStatus extends WatchlistTvEvent {
   final int id;
 
-  const OnGetWatchlistStatus(this.id);
+  const OnGetWatchlistTvStatus(this.id);
 }
 
 class OnSaveWatchlistTv extends WatchlistTvEvent {

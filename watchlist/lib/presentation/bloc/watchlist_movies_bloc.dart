@@ -1,11 +1,11 @@
 import 'package:core/domain/entities/movie/movie.dart';
 import 'package:core/domain/entities/movie/movie_detail.dart';
-import 'package:core/domain/usecases/movie/get_watchlist_movies.dart';
-import 'package:core/domain/usecases/movie/get_watchlist_status.dart';
-import 'package:core/domain/usecases/movie/remove_watchlist.dart';
-import 'package:core/domain/usecases/movie/save_watchlist.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:watchlist/domain/usecase/get_watchlist_movies.dart';
+import 'package:watchlist/domain/usecase/get_watchlist_status.dart';
+import 'package:watchlist/domain/usecase/remove_watchlist.dart';
+import 'package:watchlist/domain/usecase/save_watchlist.dart';
 
 part 'watchlist_movies_event.dart';
 part 'watchlist_movies_state.dart';

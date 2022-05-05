@@ -3,8 +3,8 @@ import 'package:core/presentation/bloc/movie/moviedetail/movie_detail_bloc.dart'
 import 'package:core/presentation/bloc/movie/popular/popular_movies_bloc.dart';
 import 'package:core/presentation/bloc/movie/recommendations/recommendations_movies_bloc.dart';
 import 'package:core/presentation/bloc/movie/toprated/toprated_movies_bloc.dart';
-import 'package:core/presentation/bloc/movie/watchlist/watchlist_movies_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:watchlist/watchlist.dart';
 
 class MockPopularMoviesEvent extends Fake implements PopularMoviesEvent {}
 
