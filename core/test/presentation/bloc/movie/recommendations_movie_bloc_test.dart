@@ -35,7 +35,7 @@ void main() {
             .thenAnswer((_) async => Right(testMovieList));
         return recommendationsMoviesBloc;
       },
-      act: (bloc) => bloc.add(OnGetRecommendationsMovies(tId)),
+      act: (bloc) => bloc.add(const OnGetRecommendationsMovies(tId)),
       expect: () => [
         RecommendationsLoading(),
         HasRecommendationsMovies(testMovieList),
@@ -48,14 +48,14 @@ void main() {
     blocTest<RecommendationsMoviesBloc, RecommendationsMoviesState>(
       'Should emit [Loading, Error] when get search is unsuccessful',
       build: () {
-        when(mockGetMovieRecommendations.execute(tId))
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        when(mockGetMovieRecommendations.execute(tId)).thenAnswer(
+            (_) async => const Left(ServerFailure('Server Failure')));
         return recommendationsMoviesBloc;
       },
-      act: (bloc) => bloc.add(OnGetRecommendationsMovies(tId)),
+      act: (bloc) => bloc.add(const OnGetRecommendationsMovies(tId)),
       expect: () => [
         RecommendationsLoading(),
-        RecommendationsError('Server Failure'),
+        const RecommendationsError('Server Failure'),
       ],
       verify: (bloc) {
         verify(mockGetMovieRecommendations.execute(tId));

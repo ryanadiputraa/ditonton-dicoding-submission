@@ -10,7 +10,7 @@ abstract class TvDetailEvent extends Equatable {
 class OnGetTvDetail extends TvDetailEvent {
   final int id;
 
-  OnGetTvDetail(this.id);
+  const OnGetTvDetail(this.id);
 
   @override
   List<Object> get props => [];

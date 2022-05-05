@@ -7,9 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
-  // ignore: constant_identifier_names
-  static const ROUTE_NAME = '/watchlist-movie';
-
   const WatchlistMoviesPage({Key? key}) : super(key: key);
 
   @override
@@ -22,8 +19,8 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
   void initState() {
     super.initState();
     Future.microtask(() {
-      context.read<WatchlistMoviesBloc>().add(OnGetWatchlistMovies());
-      context.read<WatchlistTvBloc>().add(OnGetWatchlistTv());
+      context.read<WatchlistMoviesBloc>().add(const OnGetWatchlistMovies());
+      context.read<WatchlistTvBloc>().add(const OnGetWatchlistTv());
     });
   }
 
@@ -35,8 +32,8 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
 
   @override
   void didPopNext() {
-    context.read<WatchlistMoviesBloc>().add(OnGetWatchlistMovies());
-    context.read<WatchlistTvBloc>().add(OnGetWatchlistTv());
+    context.read<WatchlistMoviesBloc>().add(const OnGetWatchlistMovies());
+    context.read<WatchlistTvBloc>().add(const OnGetWatchlistTv());
   }
 
   @override

@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PopularTvPage extends StatefulWidget {
-  static const ROUTE_NAME = '/popular-tv';
-
   const PopularTvPage({Key? key}) : super(key: key);
 
   @override
@@ -16,7 +14,8 @@ class _PopularTvPageState extends State<PopularTvPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<PopularTvBloc>().add(OnGetPopularTv()));
+    Future.microtask(
+        () => context.read<PopularTvBloc>().add(const OnGetPopularTv()));
   }
 
   @override

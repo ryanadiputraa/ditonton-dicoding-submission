@@ -6,14 +6,12 @@ import 'package:core/presentation/bloc/movie/recommendations/recommendations_mov
 import 'package:core/presentation/bloc/movie/watchlist/watchlist_movies_bloc.dart';
 import 'package:core/styles/colors.dart';
 import 'package:core/styles/text_styles.dart';
+import 'package:core/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MovieDetailPage extends StatefulWidget {
-  // ignore: constant_identifier_names
-  static const ROUTE_NAME = '/detail';
-
   final int id;
   const MovieDetailPage({Key? key, required this.id}) : super(key: key);
 
@@ -208,14 +206,14 @@ class DetailContent extends StatelessWidget {
                                             onTap: () {
                                               Navigator.pushReplacementNamed(
                                                 context,
-                                                MovieDetailPage.ROUTE_NAME,
+                                                MOVIE_DETAIL_ROUTE,
                                                 arguments: movie.id,
                                               );
                                             },
                                             child: ClipRRect(
                                               borderRadius:
                                                   const BorderRadius.all(
-                                                const Radius.circular(8),
+                                                Radius.circular(8),
                                               ),
                                               child: CachedNetworkImage(
                                                 imageUrl:
@@ -223,7 +221,7 @@ class DetailContent extends StatelessWidget {
                                                 placeholder: (context, url) =>
                                                     const Center(
                                                   child:
-                                                      const CircularProgressIndicator(),
+                                                      CircularProgressIndicator(),
                                                 ),
                                                 errorWidget:
                                                     (context, url, error) =>

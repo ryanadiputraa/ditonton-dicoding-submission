@@ -53,11 +53,11 @@ void main() {
         'Watchlist button should display add icon when movie not added to watchlist',
         (WidgetTester tester) async {
       when(() => mockMovieDetailBloc.state)
-          .thenReturn(HasMovieDetail(testMovieDetail));
+          .thenReturn(const HasMovieDetail(testMovieDetail));
       when(() => mockMovieRecommendationsBloc.state)
           .thenReturn(HasRecommendationsMovies(testMovieList));
       when(() => mockWatchlistMoviesBloc.state)
-          .thenReturn(IsMovieAddedToWatchlist(false));
+          .thenReturn(const IsMovieAddedToWatchlist(false));
 
       final watchlistButtonIcon = find.byIcon(Icons.add);
 
@@ -71,11 +71,11 @@ void main() {
         'Watchlist button should dispay check icon when movie is added to wathclist',
         (WidgetTester tester) async {
       when(() => mockMovieDetailBloc.state)
-          .thenReturn(HasMovieDetail(testMovieDetail));
+          .thenReturn(const HasMovieDetail(testMovieDetail));
       when(() => mockMovieRecommendationsBloc.state)
           .thenReturn(HasRecommendationsMovies(testMovieList));
       when(() => mockWatchlistMoviesBloc.state)
-          .thenReturn(IsMovieAddedToWatchlist(true));
+          .thenReturn(const IsMovieAddedToWatchlist(true));
 
       final watchlistButtonIcon = find.byIcon(Icons.check);
 
@@ -89,11 +89,11 @@ void main() {
         'Watchlist button should display Snackbar when added to watchlist',
         (WidgetTester tester) async {
       when(() => mockMovieDetailBloc.state)
-          .thenReturn(HasMovieDetail(testMovieDetail));
+          .thenReturn(const HasMovieDetail(testMovieDetail));
       when(() => mockMovieRecommendationsBloc.state)
           .thenReturn(HasRecommendationsMovies(testMovieList));
       when(() => mockWatchlistMoviesBloc.state)
-          .thenReturn(IsMovieAddedToWatchlist(false));
+          .thenReturn(const IsMovieAddedToWatchlist(false));
 
       final watchlistButton = find.byType(ElevatedButton);
 
@@ -113,11 +113,11 @@ void main() {
         'Watchlist button should display Snackbar when remove from watchlist',
         (WidgetTester tester) async {
       when(() => mockMovieDetailBloc.state)
-          .thenReturn(HasMovieDetail(testMovieDetail));
+          .thenReturn(const HasMovieDetail(testMovieDetail));
       when(() => mockMovieRecommendationsBloc.state)
           .thenReturn(HasRecommendationsMovies(testMovieList));
       when(() => mockWatchlistMoviesBloc.state)
-          .thenReturn(IsMovieAddedToWatchlist(true));
+          .thenReturn(const IsMovieAddedToWatchlist(true));
 
       final watchlistButton = find.byType(ElevatedButton);
 

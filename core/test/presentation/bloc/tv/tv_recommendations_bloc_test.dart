@@ -33,7 +33,7 @@ void main() {
             .thenAnswer((_) async => Right(testTvlist));
         return tvRecommendationsBloc;
       },
-      act: (bloc) => bloc.add(OnGetTvRecommendations(tId)),
+      act: (bloc) => bloc.add(const OnGetTvRecommendations(tId)),
       expect: () => [
         TvRecommendationsLoading(),
         HasTvRecommendations(testTvlist),
@@ -46,14 +46,14 @@ void main() {
     blocTest<TvRecommendationsBloc, TvRecommendationsState>(
       'Should emit [Loading, Error] when get search is unsuccessful',
       build: () {
-        when(mockGetTvRecommendations.execute(tId))
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        when(mockGetTvRecommendations.execute(tId)).thenAnswer(
+            (_) async => const Left(ServerFailure('Server Failure')));
         return tvRecommendationsBloc;
       },
-      act: (bloc) => bloc.add(OnGetTvRecommendations(tId)),
+      act: (bloc) => bloc.add(const OnGetTvRecommendations(tId)),
       expect: () => [
         TvRecommendationsLoading(),
-        TvRecommendationsError('Server Failure'),
+        const TvRecommendationsError('Server Failure'),
       ],
       verify: (bloc) {
         verify(mockGetTvRecommendations.execute(tId));

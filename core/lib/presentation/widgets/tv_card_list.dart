@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/domain/entities/tv/tv.dart';
-import 'package:core/presentation/pages/tv_detail_page.dart';
 import 'package:core/styles/text_styles.dart';
 import 'package:core/utils/constants.dart';
+import 'package:core/utils/routes.dart';
 import 'package:flutter/material.dart';
 
 class TvCard extends StatelessWidget {
@@ -18,7 +18,7 @@ class TvCard extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(
             context,
-            TvDetailPage.ROUTE_NAME,
+            TV_DETAIL_ROUTE,
             arguments: tv.id,
           );
         },
@@ -63,7 +63,7 @@ class TvCard extends StatelessWidget {
                   placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
                 borderRadius: const BorderRadius.all(Radius.circular(8)),
               ),

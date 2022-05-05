@@ -30,30 +30,30 @@ void main() {
       'should emit [Loading, HasData] when data is gotten successfully',
       build: () {
         when(mockGetMovieDetail.execute(tId))
-            .thenAnswer((_) async => Right(testMovieDetail));
+            .thenAnswer((_) async => const Right(testMovieDetail));
         return movieDetailBloc;
       },
-      act: (bloc) => bloc.add(OnGetMovieDetail(tId)),
+      act: (bloc) => bloc.add(const OnGetMovieDetail(tId)),
       expect: () => [
             MovieDetailLoading(),
-            HasMovieDetail(testMovieDetail),
+            const HasMovieDetail(testMovieDetail),
           ],
       verify: (bloc) {
         verify(mockGetMovieDetail.execute(tId));
-        return OnGetMovieDetail(tId).props;
+        return const OnGetMovieDetail(tId).props;
       });
 
   blocTest<MovieDetailBloc, MovieDetailState>(
     'Should emit [Loading, Error] when get search is unsuccessful',
     build: () {
       when(mockGetMovieDetail.execute(tId))
-          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return movieDetailBloc;
     },
-    act: (bloc) => bloc.add(OnGetMovieDetail(tId)),
+    act: (bloc) => bloc.add(const OnGetMovieDetail(tId)),
     expect: () => [
       MovieDetailLoading(),
-      MovieDetailError('Server Failure'),
+      const MovieDetailError('Server Failure'),
     ],
     verify: (bloc) {
       verify(mockGetMovieDetail.execute(tId));

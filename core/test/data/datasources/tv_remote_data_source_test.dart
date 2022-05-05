@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'dart:convert';
 
 import 'package:core/data/datasources/tv/tv_remote_data_source.dart';
@@ -111,7 +113,7 @@ void main() {
   });
 
   group('get tv detail', () {
-    final tId = 1399;
+    const tId = 1399;
     final tTvDetail = TvDetailResponseModel.fromJson(
         json.decode(readJson('dummy_data/tv_detail.json')));
 
@@ -142,7 +144,7 @@ void main() {
     final tTvList = TvResponse.fromJson(
             json.decode(readJson('dummy_data/tv_recommendations.json')))
         .tvList;
-    final tId = 1;
+    const tId = 1;
 
     test('should return list of Tv Model when the response code is 200',
         () async {
@@ -174,7 +176,7 @@ void main() {
     final tSearchResult = TvResponse.fromJson(
             json.decode(readJson('dummy_data/search_got_tv.json')))
         .tvList;
-    final tQuery = 'Game of Thrones';
+    const tQuery = 'Game of Thrones';
 
     test('should return list of tv when response code is 200', () async {
       // arrange

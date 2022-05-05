@@ -3,22 +3,13 @@ import 'package:core/domain/entities/tv/tv.dart';
 import 'package:core/presentation/bloc/tv/ontheair/ontheair_tv_bloc.dart';
 import 'package:core/presentation/bloc/tv/popular/popular_tv_bloc.dart';
 import 'package:core/presentation/bloc/tv/toprated/toprated_tv_bloc.dart';
-import 'package:core/presentation/pages/home_movie_page.dart';
-import 'package:core/presentation/pages/popular_tv_page.dart';
-import 'package:core/presentation/pages/search_tv_page.dart';
-import 'package:core/presentation/pages/top_rated_tv_page.dart';
-import 'package:core/presentation/pages/tv_detail_page.dart';
-import 'package:core/presentation/pages/watchlist_movies_page.dart';
 import 'package:core/styles/text_styles.dart';
 import 'package:core/utils/constants.dart';
+import 'package:core/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:about/about.dart';
 
 class TvListPage extends StatefulWidget {
-  // ignore: constant_identifier_names
-  static const ROUTE_NAME = '/tv';
-
   const TvListPage({Key? key}) : super(key: key);
 
   @override
@@ -30,9 +21,9 @@ class _TvListPageState extends State<TvListPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      context.read<OnTheAirTvBloc>().add(OnGetOnTheAirTv());
-      context.read<PopularTvBloc>().add(OnGetPopularTv());
-      context.read<TopRatedTvBloc>().add(OnGetTopRatedTv());
+      context.read<OnTheAirTvBloc>().add(const OnGetOnTheAirTv());
+      context.read<PopularTvBloc>().add(const OnGetPopularTv());
+      context.read<TopRatedTvBloc>().add(const OnGetTopRatedTv());
     });
   }
 
@@ -53,7 +44,7 @@ class _TvListPageState extends State<TvListPage> {
               leading: const Icon(Icons.movie),
               title: const Text('Movies'),
               onTap: () {
-                Navigator.pushNamed(context, HomeMoviePage.ROUTE_NAME);
+                Navigator.pushNamed(context, HOME_ROUTE);
               },
             ),
             ListTile(
@@ -67,12 +58,12 @@ class _TvListPageState extends State<TvListPage> {
               leading: const Icon(Icons.save_alt),
               title: const Text('Watchlist'),
               onTap: () {
-                Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
+                Navigator.pushNamed(context, WATCHLIST_PAGE_ROUTE);
               },
             ),
             ListTile(
               onTap: () {
-                Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
+                Navigator.pushNamed(context, ABOUT_PAGE_ROUTE);
               },
               leading: const Icon(Icons.info_outline),
               title: const Text('About'),
@@ -85,7 +76,7 @@ class _TvListPageState extends State<TvListPage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SearchTvPage.ROUTE_NAME);
+              Navigator.pushNamed(context, SEARCH_TV_ROUTE);
             },
             icon: const Icon(Icons.search),
           )
@@ -123,8 +114,7 @@ class _TvListPageState extends State<TvListPage> {
               }),
               _buildSubHeading(
                 title: 'Popular',
-                onTap: () =>
-                    Navigator.pushNamed(context, PopularTvPage.ROUTE_NAME),
+                onTap: () => Navigator.pushNamed(context, POPULAR_TV_ROUTE),
               ),
               BlocBuilder<PopularTvBloc, PopularTvState>(
                   builder: (context, state) {
@@ -148,8 +138,7 @@ class _TvListPageState extends State<TvListPage> {
               }),
               _buildSubHeading(
                 title: 'Top Rated',
-                onTap: () =>
-                    Navigator.pushNamed(context, TopRatedTvPage.ROUTE_NAME),
+                onTap: () => Navigator.pushNamed(context, TOP_RATED_TV_ROUTE),
               ),
               BlocBuilder<TopRatedTvBloc, TopRatedTvState>(
                   builder: (context, state) {
@@ -191,10 +180,7 @@ class _TvListPageState extends State<TvListPage> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
-              children: [
-                const Text('See More'),
-                const Icon(Icons.arrow_forward_ios)
-              ],
+              children: const [Text('See More'), Icon(Icons.arrow_forward_ios)],
             ),
           ),
         ),
@@ -206,11 +192,11 @@ class _TvListPageState extends State<TvListPage> {
 class TvList extends StatelessWidget {
   final List<Tv> tvs;
 
-  TvList(this.tvs);
+  const TvList(this.tvs, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 200,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -222,7 +208,7 @@ class TvList extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  TvDetailPage.ROUTE_NAME,
+                  TV_DETAIL_ROUTE,
                   arguments: tv.id,
                 );
               },

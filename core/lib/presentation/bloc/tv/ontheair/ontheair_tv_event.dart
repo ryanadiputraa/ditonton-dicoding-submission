@@ -8,7 +8,7 @@ abstract class OnTheAirTvEvent extends Equatable {
 }
 
 class OnGetOnTheAirTv extends OnTheAirTvEvent {
-  OnGetOnTheAirTv();
+  const OnGetOnTheAirTv();
 
   @override
   List<Object> get props => [];

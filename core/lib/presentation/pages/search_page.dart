@@ -5,9 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchPage extends StatelessWidget {
-  // ignore: constant_identifier_names
-  static const ROUTE_NAME = '/search';
-
   const SearchPage({Key? key}) : super(key: key);
 
   @override

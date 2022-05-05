@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TopRatedTvPage extends StatefulWidget {
-  // ignore: constant_identifier_names
-  static const ROUTE_NAME = '/toprated-tv';
-
   const TopRatedTvPage({Key? key}) : super(key: key);
 
   @override
@@ -18,7 +15,7 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
   void initState() {
     super.initState();
     Future.microtask(
-        () => context.read<TopRatedTvBloc>().add(OnGetTopRatedTv()));
+        () => context.read<TopRatedTvBloc>().add(const OnGetTopRatedTv()));
   }
 
   @override

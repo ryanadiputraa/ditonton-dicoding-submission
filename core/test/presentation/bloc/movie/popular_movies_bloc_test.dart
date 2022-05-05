@@ -23,7 +23,7 @@ void main() {
   final tMovie = Movie(
     adult: false,
     backdropPath: 'backdropPath',
-    genreIds: [1, 2, 3],
+    genreIds: const [1, 2, 3],
     id: 1,
     originalTitle: 'originalTitle',
     overview: 'overview',
@@ -49,7 +49,7 @@ void main() {
             .thenAnswer((_) async => Right(tMovieList));
         return popularMoviesBloc;
       },
-      act: (bloc) => bloc.add(OnGetPopularMovies()),
+      act: (bloc) => bloc.add(const OnGetPopularMovies()),
       expect: () => [
         PopularLoading(),
         HasPopularMovies(tMovieList),
@@ -62,14 +62,14 @@ void main() {
     blocTest<PopularMoviesBloc, PopularMoviesState>(
       'Should emit [Loading, Error] when get search is unsuccessful',
       build: () {
-        when(mockGetPopularMovies.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        when(mockGetPopularMovies.execute()).thenAnswer(
+            (_) async => const Left(ServerFailure('Server Failure')));
         return popularMoviesBloc;
       },
-      act: (bloc) => bloc.add(OnGetPopularMovies()),
+      act: (bloc) => bloc.add(const OnGetPopularMovies()),
       expect: () => [
         PopularLoading(),
-        PopularError('Server Failure'),
+        const PopularError('Server Failure'),
       ],
       verify: (bloc) {
         verify(mockGetPopularMovies.execute());

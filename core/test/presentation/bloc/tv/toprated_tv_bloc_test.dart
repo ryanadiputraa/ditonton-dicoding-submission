@@ -22,7 +22,7 @@ void main() {
 
   final tTv = Tv(
     backdropPath: 'backdropPath',
-    genreIds: [1, 2, 3],
+    genreIds: const [1, 2, 3],
     id: 1,
     originalName: 'originalTitle',
     overview: 'overview',
@@ -48,7 +48,7 @@ void main() {
             .thenAnswer((_) async => Right(tTvList));
         return topRatedTvBloc;
       },
-      act: (bloc) => bloc.add(OnGetTopRatedTv()),
+      act: (bloc) => bloc.add(const OnGetTopRatedTv()),
       expect: () => [
         TopRatedTvLoading(),
         HasTopRatedTv(tTvList),
@@ -61,14 +61,14 @@ void main() {
     blocTest<TopRatedTvBloc, TopRatedTvState>(
       'Should emit [Loading, Error] when get search is unsuccessful',
       build: () {
-        when(mockGetTopRatedTv.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        when(mockGetTopRatedTv.execute()).thenAnswer(
+            (_) async => const Left(ServerFailure('Server Failure')));
         return topRatedTvBloc;
       },
-      act: (bloc) => bloc.add(OnGetTopRatedTv()),
+      act: (bloc) => bloc.add(const OnGetTopRatedTv()),
       expect: () => [
         TopRatedTvLoading(),
-        TopRatedTvError('Server Failure'),
+        const TopRatedTvError('Server Failure'),
       ],
       verify: (bloc) {
         verify(mockGetTopRatedTv.execute());

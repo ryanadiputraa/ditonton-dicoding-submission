@@ -30,30 +30,30 @@ void main() {
       'should emit [Loading, HasData] when data is gotten successfully',
       build: () {
         when(mockGetDetailTv.execute(tId))
-            .thenAnswer((_) async => Right(testTvDetail));
+            .thenAnswer((_) async => const Right(testTvDetail));
         return tvDetailBloc;
       },
-      act: (bloc) => bloc.add(OnGetTvDetail(tId)),
+      act: (bloc) => bloc.add(const OnGetTvDetail(tId)),
       expect: () => [
             TvDetailLoading(),
-            HasTvDetail(testTvDetail),
+            const HasTvDetail(testTvDetail),
           ],
       verify: (bloc) {
         verify(mockGetDetailTv.execute(tId));
-        return OnGetTvDetail(tId).props;
+        return const OnGetTvDetail(tId).props;
       });
 
   blocTest<TvDetailBloc, TvDetailState>(
     'Should emit [Loading, Error] when get search is unsuccessful',
     build: () {
       when(mockGetDetailTv.execute(tId))
-          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return tvDetailBloc;
     },
-    act: (bloc) => bloc.add(OnGetTvDetail(tId)),
+    act: (bloc) => bloc.add(const OnGetTvDetail(tId)),
     expect: () => [
       TvDetailLoading(),
-      TvDetailError('Server Failure'),
+      const TvDetailError('Server Failure'),
     ],
     verify: (bloc) {
       verify(mockGetDetailTv.execute(tId));

@@ -8,7 +8,7 @@ abstract class TopRatedMoviesEvent extends Equatable {
 }
 
 class OnGetTopRatedMovies extends TopRatedMoviesEvent {
-  OnGetTopRatedMovies();
+  const OnGetTopRatedMovies();
 
   @override
   List<Object> get props => [];

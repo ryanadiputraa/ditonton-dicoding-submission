@@ -23,7 +23,7 @@ void main() {
   final tMovie = Movie(
     adult: false,
     backdropPath: 'backdropPath',
-    genreIds: [1, 2, 3],
+    genreIds: const [1, 2, 3],
     id: 1,
     originalTitle: 'originalTitle',
     overview: 'overview',
@@ -49,7 +49,7 @@ void main() {
             .thenAnswer((_) async => Right(tMovieList));
         return nowPlayingMoviesBloc;
       },
-      act: (bloc) => bloc.add(OnGetNowPlayingMovies()),
+      act: (bloc) => bloc.add(const OnGetNowPlayingMovies()),
       expect: () => [
         NowPlayingLoading(),
         HasNowPlayingMovies(tMovieList),
@@ -62,14 +62,14 @@ void main() {
     blocTest<NowPlayingMoviesBloc, NowPlayingMoviesState>(
       'Should emit [Loading, Error] when get search is unsuccessful',
       build: () {
-        when(mockGetNowPlayingMovies.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        when(mockGetNowPlayingMovies.execute()).thenAnswer(
+            (_) async => const Left(ServerFailure('Server Failure')));
         return nowPlayingMoviesBloc;
       },
-      act: (bloc) => bloc.add(OnGetNowPlayingMovies()),
+      act: (bloc) => bloc.add(const OnGetNowPlayingMovies()),
       expect: () => [
         NowPlayingLoading(),
-        NowPlayingError('Server Failure'),
+        const NowPlayingError('Server Failure'),
       ],
       verify: (bloc) {
         verify(mockGetNowPlayingMovies.execute());

@@ -22,7 +22,7 @@ void main() {
 
   final tTv = Tv(
     backdropPath: 'backdropPath',
-    genreIds: [1, 2, 3],
+    genreIds: const [1, 2, 3],
     id: 1,
     originalName: 'originalTitle',
     overview: 'overview',
@@ -48,7 +48,7 @@ void main() {
             .thenAnswer((_) async => Right(tTvList));
         return onTheAirTvBloc;
       },
-      act: (bloc) => bloc.add(OnGetOnTheAirTv()),
+      act: (bloc) => bloc.add(const OnGetOnTheAirTv()),
       expect: () => [
         OnTheAirTvLoading(),
         HasOnTheAirTv(tTvList),
@@ -61,14 +61,14 @@ void main() {
     blocTest<OnTheAirTvBloc, OnTheAirTvState>(
       'Should emit [Loading, Error] when get search is unsuccessful',
       build: () {
-        when(mockGetOnTheAirTv.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        when(mockGetOnTheAirTv.execute()).thenAnswer(
+            (_) async => const Left(ServerFailure('Server Failure')));
         return onTheAirTvBloc;
       },
-      act: (bloc) => bloc.add(OnGetOnTheAirTv()),
+      act: (bloc) => bloc.add(const OnGetOnTheAirTv()),
       expect: () => [
         OnTheAirTvLoading(),
-        OnTheAirTvError('Server Failure'),
+        const OnTheAirTvError('Server Failure'),
       ],
       verify: (bloc) {
         verify(mockGetOnTheAirTv.execute());

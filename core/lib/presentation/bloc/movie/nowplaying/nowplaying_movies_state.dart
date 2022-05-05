@@ -15,7 +15,7 @@ class NowPlayingLoading extends NowPlayingMoviesState {}
 class NowPlayingError extends NowPlayingMoviesState {
   final String message;
 
-  NowPlayingError(this.message);
+  const NowPlayingError(this.message);
 
   @override
   List<Object> get props => [message];
@@ -24,7 +24,7 @@ class NowPlayingError extends NowPlayingMoviesState {
 class HasNowPlayingMovies extends NowPlayingMoviesState {
   final List<Movie> result;
 
-  HasNowPlayingMovies(this.result);
+  const HasNowPlayingMovies(this.result);
 
   @override
   List<Object> get props => [result];

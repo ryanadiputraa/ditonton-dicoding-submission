@@ -5,20 +5,11 @@ import 'package:core/domain/entities/movie/movie.dart';
 import 'package:core/presentation/bloc/movie/nowplaying/nowplaying_movies_bloc.dart';
 import 'package:core/presentation/bloc/movie/popular/popular_movies_bloc.dart';
 import 'package:core/presentation/bloc/movie/toprated/toprated_movies_bloc.dart';
-import 'package:core/presentation/pages/movie_detail_page.dart';
-import 'package:core/presentation/pages/popular_movies_page.dart';
-import 'package:core/presentation/pages/search_page.dart';
-import 'package:core/presentation/pages/top_rated_movies_page.dart';
-import 'package:core/presentation/pages/tv_list_page.dart';
-import 'package:core/presentation/pages/watchlist_movies_page.dart';
+import 'package:core/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:about/about.dart';
 
 class HomeMoviePage extends StatefulWidget {
-  // ignore: constant_identifier_names
-  static const ROUTE_NAME = '/home';
-
   const HomeMoviePage({Key? key}) : super(key: key);
 
   @override
@@ -30,9 +21,9 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      context.read<NowPlayingMoviesBloc>().add(OnGetNowPlayingMovies());
-      context.read<PopularMoviesBloc>().add(OnGetPopularMovies());
-      context.read<TopRatedMoviesBloc>().add(OnGetTopRatedMovies());
+      context.read<NowPlayingMoviesBloc>().add(const OnGetNowPlayingMovies());
+      context.read<PopularMoviesBloc>().add(const OnGetPopularMovies());
+      context.read<TopRatedMoviesBloc>().add(const OnGetTopRatedMovies());
     });
   }
 
@@ -60,19 +51,19 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               leading: const Icon(Icons.tv),
               title: const Text('Tv'),
               onTap: () {
-                Navigator.pushNamed(context, TvListPage.ROUTE_NAME);
+                Navigator.pushNamed(context, TV_PAGE_ROUTE);
               },
             ),
             ListTile(
               leading: const Icon(Icons.save_alt),
               title: const Text('Watchlist'),
               onTap: () {
-                Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
+                Navigator.pushNamed(context, WATCHLIST_PAGE_ROUTE);
               },
             ),
             ListTile(
               onTap: () {
-                Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
+                Navigator.pushNamed(context, ABOUT_PAGE_ROUTE);
               },
               leading: const Icon(Icons.info_outline),
               title: const Text('About'),
@@ -85,7 +76,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+              Navigator.pushNamed(context, SEARCH_MOVIE_ROUTE);
             },
             icon: const Icon(Icons.search),
           )
@@ -123,8 +114,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               }),
               _buildSubHeading(
                 title: 'Popular',
-                onTap: () =>
-                    Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
+                onTap: () => Navigator.pushNamed(context, POPULAR_MOVIE_ROUTE),
               ),
               BlocBuilder<PopularMoviesBloc, PopularMoviesState>(
                   builder: (context, state) {
@@ -149,13 +139,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               _buildSubHeading(
                 title: 'Top Rated',
                 onTap: () =>
-                    Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
+                    Navigator.pushNamed(context, TOP_RATED_MOVIE_ROUTE),
               ),
               BlocBuilder<TopRatedMoviesBloc, TopRatedMoviesState>(
                   builder: (context, state) {
                 if (state is TopRatedLoading) {
                   return const Center(
-                    child: const CircularProgressIndicator(),
+                    child: CircularProgressIndicator(),
                   );
                 } else if (state is HasTopRatedMovies) {
                   return MovieList(state.result);
@@ -219,7 +209,7 @@ class MovieList extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  MovieDetailPage.ROUTE_NAME,
+                  MOVIE_DETAIL_ROUTE,
                   arguments: movie.id,
                 );
               },

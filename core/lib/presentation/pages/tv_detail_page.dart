@@ -6,14 +6,12 @@ import 'package:core/presentation/bloc/tv/tvdetail/tv_detail_bloc.dart';
 import 'package:core/presentation/bloc/tv/watchlist/watchlist_tv_bloc.dart';
 import 'package:core/styles/colors.dart';
 import 'package:core/styles/text_styles.dart';
+import 'package:core/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class TvDetailPage extends StatefulWidget {
-  // ignore: constant_identifier_names
-  static const ROUTE_NAME = '/tv_detail';
-
   final int id;
   const TvDetailPage({Key? key, required this.id}) : super(key: key);
 
@@ -193,7 +191,7 @@ class DetailContent extends StatelessWidget {
                                     child: CircularProgressIndicator(),
                                   );
                                 } else if (state is HasTvRecommendations) {
-                                  return Container(
+                                  return SizedBox(
                                     height: 150,
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
@@ -205,7 +203,7 @@ class DetailContent extends StatelessWidget {
                                             onTap: () {
                                               Navigator.pushReplacementNamed(
                                                 context,
-                                                TvDetailPage.ROUTE_NAME,
+                                                TV_DETAIL_ROUTE,
                                                 arguments: tv.id,
                                               );
                                             },

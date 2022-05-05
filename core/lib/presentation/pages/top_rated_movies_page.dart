@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TopRatedMoviesPage extends StatefulWidget {
-  // ignore: constant_identifier_names
-  static const ROUTE_NAME = '/top-rated-movie';
-
   const TopRatedMoviesPage({Key? key}) : super(key: key);
 
   @override
@@ -17,8 +14,8 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => context.read<TopRatedMoviesBloc>().add(OnGetTopRatedMovies()));
+    Future.microtask(() =>
+        context.read<TopRatedMoviesBloc>().add(const OnGetTopRatedMovies()));
   }
 
   @override

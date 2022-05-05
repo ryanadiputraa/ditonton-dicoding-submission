@@ -40,7 +40,7 @@ void main() {
           .thenAnswer((_) async => Right([testWatchlistMovie]));
       return watchlistMovieBloc;
     },
-    act: (bloc) => bloc.add(OnGetWatchlistMovies()),
+    act: (bloc) => bloc.add(const OnGetWatchlistMovies()),
     expect: () => [
       WatchlistMoviesLoading(),
       HasWatchlistMovies([testWatchlistMovie]),
@@ -53,14 +53,14 @@ void main() {
   blocTest<WatchlistMoviesBloc, WatchlistMoviesState>(
     'Should return error when data is unsuccessful',
     build: () {
-      when(mockGetWatchlistMovies.execute())
-          .thenAnswer((_) async => Left(DatabaseFailure("Can't get data")));
+      when(mockGetWatchlistMovies.execute()).thenAnswer(
+          (_) async => const Left(DatabaseFailure("Can't get data")));
       return watchlistMovieBloc;
     },
-    act: (bloc) => bloc.add(OnGetWatchlistMovies()),
+    act: (bloc) => bloc.add(const OnGetWatchlistMovies()),
     expect: () => [
       WatchlistMoviesLoading(),
-      WatchlistMoviesError("Can't get data"),
+      const WatchlistMoviesError("Can't get data"),
     ],
     verify: (bloc) {
       verify(mockGetWatchlistMovies.execute());
@@ -75,7 +75,7 @@ void main() {
       return watchlistMovieBloc;
     },
     act: (bloc) => bloc.add(OnGetWatchlistStatus(testMovieDetail.id)),
-    expect: () => [IsMovieAddedToWatchlist(true)],
+    expect: () => [const IsMovieAddedToWatchlist(true)],
     verify: (bloc) {
       verify(mockGetWatchListStatus.execute(testMovieDetail.id));
     },
@@ -85,12 +85,12 @@ void main() {
     'Should show failure message when fail to save to watchlist',
     build: () {
       when(mockSaveWatchlist.execute(testMovieDetail)).thenAnswer(
-          (_) async => Left(DatabaseFailure("Can't save to watchlist")));
+          (_) async => const Left(DatabaseFailure("Can't save to watchlist")));
       return watchlistMovieBloc;
     },
-    act: (bloc) => bloc.add(OnSaveWatchlistMovies(testMovieDetail)),
+    act: (bloc) => bloc.add(const OnSaveWatchlistMovies(testMovieDetail)),
     expect: () => [
-      WatchlistMoviesError("Can't save to watchlist"),
+      const WatchlistMoviesError("Can't save to watchlist"),
     ],
     verify: (bloc) {
       verify(mockSaveWatchlist.execute(testMovieDetail));
@@ -101,11 +101,11 @@ void main() {
     'Should show success message when successfully save to watchlist',
     build: () {
       when(mockSaveWatchlist.execute(testMovieDetail))
-          .thenAnswer((_) async => Right(watchlistAddMessage));
+          .thenAnswer((_) async => const Right(watchlistAddMessage));
       return watchlistMovieBloc;
     },
-    act: (bloc) => bloc.add(OnSaveWatchlistMovies(testMovieDetail)),
-    expect: () => [WatchlistMovieMessage(watchlistAddMessage)],
+    act: (bloc) => bloc.add(const OnSaveWatchlistMovies(testMovieDetail)),
+    expect: () => [const WatchlistMovieMessage(watchlistAddMessage)],
     verify: (bloc) {
       verify(mockSaveWatchlist.execute(testMovieDetail));
     },
@@ -114,13 +114,13 @@ void main() {
   blocTest<WatchlistMoviesBloc, WatchlistMoviesState>(
     'Should show failure message when fail to remove from watchlist',
     build: () {
-      when(mockRemoveWatchlist.execute(testMovieDetail)).thenAnswer(
-          (_) async => Left(DatabaseFailure("Can't remove from watchlist")));
+      when(mockRemoveWatchlist.execute(testMovieDetail)).thenAnswer((_) async =>
+          const Left(DatabaseFailure("Can't remove from watchlist")));
       return watchlistMovieBloc;
     },
-    act: (bloc) => bloc.add(OnRemoveWatchlistMovies(testMovieDetail)),
+    act: (bloc) => bloc.add(const OnRemoveWatchlistMovies(testMovieDetail)),
     expect: () => [
-      WatchlistMoviesError("Can't remove from watchlist"),
+      const WatchlistMoviesError("Can't remove from watchlist"),
     ],
     verify: (bloc) {
       verify(mockRemoveWatchlist.execute(testMovieDetail));
@@ -131,11 +131,11 @@ void main() {
     'Should show success message when successfully remove from watchlist',
     build: () {
       when(mockRemoveWatchlist.execute(testMovieDetail))
-          .thenAnswer((_) async => Right(watchlistRemoveMessage));
+          .thenAnswer((_) async => const Right(watchlistRemoveMessage));
       return watchlistMovieBloc;
     },
-    act: (bloc) => bloc.add(OnRemoveWatchlistMovies(testMovieDetail)),
-    expect: () => [WatchlistMovieMessage(watchlistRemoveMessage)],
+    act: (bloc) => bloc.add(const OnRemoveWatchlistMovies(testMovieDetail)),
+    expect: () => [const WatchlistMovieMessage(watchlistRemoveMessage)],
     verify: (bloc) {
       verify(mockRemoveWatchlist.execute(testMovieDetail));
     },

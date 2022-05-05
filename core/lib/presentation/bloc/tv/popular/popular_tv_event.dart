@@ -8,7 +8,7 @@ abstract class PopularTvEvent extends Equatable {
 }
 
 class OnGetPopularTv extends PopularTvEvent {
-  OnGetPopularTv();
+  const OnGetPopularTv();
 
   @override
   List<Object> get props => [];

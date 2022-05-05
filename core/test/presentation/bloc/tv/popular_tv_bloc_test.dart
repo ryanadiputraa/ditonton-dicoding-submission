@@ -22,7 +22,7 @@ void main() {
 
   final tTv = Tv(
     backdropPath: 'backdropPath',
-    genreIds: [1, 2, 3],
+    genreIds: const [1, 2, 3],
     id: 1,
     originalName: 'originalTitle',
     overview: 'overview',
@@ -48,7 +48,7 @@ void main() {
             .thenAnswer((_) async => Right(tTvList));
         return popularTvBloc;
       },
-      act: (bloc) => bloc.add(OnGetPopularTv()),
+      act: (bloc) => bloc.add(const OnGetPopularTv()),
       expect: () => [
         PopularTvLoading(),
         HasPopularTv(tTvList),
@@ -61,14 +61,14 @@ void main() {
     blocTest<PopularTvBloc, PopularTvState>(
       'Should emit [Loading, Error] when get search is unsuccessful',
       build: () {
-        when(mockGetPopularTv.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        when(mockGetPopularTv.execute()).thenAnswer(
+            (_) async => const Left(ServerFailure('Server Failure')));
         return popularTvBloc;
       },
-      act: (bloc) => bloc.add(OnGetPopularTv()),
+      act: (bloc) => bloc.add(const OnGetPopularTv()),
       expect: () => [
         PopularTvLoading(),
-        PopularTvError('Server Failure'),
+        const PopularTvError('Server Failure'),
       ],
       verify: (bloc) {
         verify(mockGetPopularTv.execute());
