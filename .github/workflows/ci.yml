@@ -26,14 +26,14 @@ jobs:
           flutter test
       - name: Test watchlist module
         working-directory: ./watchlist
-          run: |
-            flutter pub get
-            flutter test
+        run: |
+          flutter pub get
+          flutter test
       - name: Test movie module
         working-directory: ./movie
-          run: |
-            flutter pub get
-            flutter test
+        run: |
+          flutter pub get
+          flutter test
 
       # android apk build
       - uses: actions/setup-java@v2
