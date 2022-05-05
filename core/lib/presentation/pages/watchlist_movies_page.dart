@@ -1,4 +1,4 @@
-import 'package:core/common/utils.dart';
+import 'package:core/utils/utils.dart';
 import 'package:core/presentation/bloc/movie/watchlist/watchlist_movies_bloc.dart';
 import 'package:core/presentation/bloc/tv/watchlist/watchlist_tv_bloc.dart';
 import 'package:core/presentation/widgets/movie_card_list.dart';

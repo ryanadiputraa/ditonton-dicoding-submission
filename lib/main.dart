@@ -1,4 +1,4 @@
-import 'package:core/common/utils.dart';
+import 'package:core/utils/utils.dart';
 import 'package:core/presentation/bloc/movie/moviedetail/movie_detail_bloc.dart';
 import 'package:core/presentation/bloc/movie/nowplaying/nowplaying_movies_bloc.dart';
 import 'package:core/presentation/bloc/movie/popular/popular_movies_bloc.dart';

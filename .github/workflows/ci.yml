@@ -19,11 +19,6 @@ jobs:
         run: |
           flutter pub get
           flutter test
-      - name: Test about module
-        working-directory: ./about
-        run: |
-          flutter pub get
-          flutter test
       - name: Test search module
         working-directory: ./search
         run: |
