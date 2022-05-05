@@ -34,6 +34,11 @@ jobs:
         run: |
           flutter pub get
           flutter test
+      - name: Test tv module
+        working-directory: ./tv
+        run: |
+          flutter pub get
+          flutter test
 
       # android apk build
       - uses: actions/setup-java@v2

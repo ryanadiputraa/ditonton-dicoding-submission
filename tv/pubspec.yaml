@@ -1,4 +1,4 @@
-name: watchlist
+name: tv
 description: A new Flutter package project.
 publish_to: "none"
 version: 0.0.1
@@ -11,13 +11,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  dartz: ^0.10.0-nullsafety.2
+  flutter_bloc: ^8.0.1
 
   core:
     path: ../core
-  movie:
-    path: ../movie
-  tv:
-    path: ../tv
 
 dev_dependencies:
   flutter_test:

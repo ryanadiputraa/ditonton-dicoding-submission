@@ -8,21 +8,12 @@ import 'package:core/data/repositories/movie/movie_repository_impl.dart';
 import 'package:core/data/repositories/tv/tv_repository_impl.dart';
 import 'package:core/domain/repositories/movie/movie_repository.dart';
 import 'package:core/domain/repositories/tv/tv_repository.dart';
-import 'package:core/domain/usecases/tv/get_detail_tv.dart';
-import 'package:core/domain/usecases/tv/get_ontheair_tv.dart';
-import 'package:core/domain/usecases/tv/get_popular_tv.dart';
-import 'package:core/domain/usecases/tv/get_top_rated_tv.dart';
-import 'package:core/domain/usecases/tv/get_tv_recommendations.dart';
-import 'package:core/presentation/bloc/tv/ontheair/ontheair_tv_bloc.dart';
-import 'package:core/presentation/bloc/tv/popular/popular_tv_bloc.dart';
-import 'package:core/presentation/bloc/tv/recommendations/tv_recommendations_bloc.dart';
-import 'package:core/presentation/bloc/tv/toprated/toprated_tv_bloc.dart';
-import 'package:core/presentation/bloc/tv/tvdetail/tv_detail_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/io_client.dart';
 import 'package:search/search.dart';
 import 'package:watchlist/watchlist.dart';
 import 'package:movie/movie.dart';
+import 'package:tv/tv.dart';
 
 final locator = GetIt.instance;
 

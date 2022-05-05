@@ -1,8 +1,8 @@
 import 'package:core/utils/utils.dart';
-import 'package:core/presentation/widgets/movie_card_list.dart';
-import 'package:core/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie/presentation/widgets/movie_card_list.dart';
+import 'package:tv/presentation/widget/tv_card_list.dart';
 import 'package:watchlist/presentation/bloc/watchlist_movies_bloc.dart';
 import 'package:watchlist/presentation/bloc/watchlist_tv_bloc.dart';
 

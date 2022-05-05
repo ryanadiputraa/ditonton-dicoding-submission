@@ -1,13 +1,4 @@
 import 'package:core/utils/utils.dart';
-import 'package:core/presentation/bloc/tv/ontheair/ontheair_tv_bloc.dart';
-import 'package:core/presentation/bloc/tv/popular/popular_tv_bloc.dart';
-import 'package:core/presentation/bloc/tv/recommendations/tv_recommendations_bloc.dart';
-import 'package:core/presentation/bloc/tv/toprated/toprated_tv_bloc.dart';
-import 'package:core/presentation/bloc/tv/tvdetail/tv_detail_bloc.dart';
-import 'package:core/presentation/pages/popular_tv_page.dart';
-import 'package:core/presentation/pages/top_rated_tv_page.dart';
-import 'package:core/presentation/pages/tv_detail_page.dart';
-import 'package:core/presentation/pages/tv_list_page.dart';
 import 'package:core/styles/colors.dart';
 import 'package:core/styles/text_styles.dart';
 import 'package:core/utils/routes.dart';
@@ -21,6 +12,7 @@ import 'package:about/about.dart';
 import 'package:search/search.dart';
 import 'package:watchlist/watchlist.dart';
 import 'package:movie/movie.dart';
+import 'package:tv/tv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
