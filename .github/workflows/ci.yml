@@ -14,31 +14,10 @@ jobs:
           channel: "stable"
       - run: flutter --version
 
-      - name: Test core module
-        working-directory: ./core
-        run: |
-          flutter pub get
-          flutter test
-      - name: Test search module
-        working-directory: ./search
-        run: |
-          flutter pub get
-          flutter test
-      - name: Test watchlist module
-        working-directory: ./watchlist
-        run: |
-          flutter pub get
-          flutter test
-      - name: Test movie module
-        working-directory: ./movie
-        run: |
-          flutter pub get
-          flutter test
-      - name: Test tv module
-        working-directory: ./tv
-        run: |
-          flutter pub get
-          flutter test
+      # run test script
+      - name: Run test script
+        run: ./test.sh
+        shell: bash
 
       # android apk build
       - uses: actions/setup-java@v2
