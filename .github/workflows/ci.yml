@@ -16,7 +16,7 @@ jobs:
 
       # run test script
       - name: Run test script
-        run: ./test.sh
+        run: ./.github/scripts/test.sh
         shell: bash
 
       # android apk build
