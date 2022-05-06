@@ -16,6 +16,8 @@ dependencies:
 
   core:
     path: ../core
+  watchlist:
+    path: ../watchlist
 
 dev_dependencies:
   flutter_test:
